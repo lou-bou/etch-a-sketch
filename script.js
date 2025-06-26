@@ -14,12 +14,12 @@ function removeGrid() {
 
 function createGrid(squares) {
     if (container) {
-        for (let i = 0; i <= squares; i++) {
+        for (let i = 1; i <= squares; i++) {
             var column = document.createElement("div");
             column.classList.add("column");
             container.appendChild(column);
             if (column) {
-                for (let i = 0; i <= squares; i++) {
+                for (let i = 1; i <= squares; i++) {
                     var pixel = document.createElement("div");
                     pixel.classList.add("pixel");
                     column.appendChild(pixel);
@@ -52,6 +52,8 @@ pixels.forEach((pixel) => {
     });
 })
 
+
+
 // select squares per side
 
 const changer = document.querySelector("#changer");
@@ -59,12 +61,16 @@ const changer = document.querySelector("#changer");
 let squares;
 
 changer.addEventListener("click", () => {
-    squares = prompt("Enter the number of squares per side");
-    if (squares == null || squares == "" || isNaN(squares)) {
-        squares = 16;
-    } else {
-        squares = parseInt(squares);
+    while (true) {
+        squares = prompt("Enter the number of squares per side (<200)");
+        if (squares == null || squares == "" || isNaN(squares) || squares > 200) {
+            continue;
+        } else {
+            squares = parseInt(squares);
+            break;
+        }
     }
+    
 
     removeGrid();
     createGrid(squares);
@@ -78,3 +84,4 @@ changer.addEventListener("click", () => {
         });
     })
 })
+
