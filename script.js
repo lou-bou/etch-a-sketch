@@ -15,3 +15,10 @@ if (container) {
     }
 }
 
+const pixels = document.querySelectorAll(".pixel");
+
+pixels.forEach((pixel) => {
+    pixel.addEventListener("mousemove", () => {
+        pixel.classList.add("colored");
+    });
+})
