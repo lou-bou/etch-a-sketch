@@ -1,24 +1,71 @@
-const container = document.querySelector(".container");
+function removeGrid() {
+    let pixels = document.querySelectorAll(".pixel");
 
-if (container) {
-    for (let i = 0; i <= 16; i++) {
-        var column = document.createElement("div");
-        column.classList.add("column");
-        container.appendChild(column);
-        if (column) {
-            for (let i = 0; i <= 16; i++) {
-                var pixel = document.createElement("div");
-                pixel.classList.add("pixel");
-                column.appendChild(pixel);
+    pixels.forEach((pixel) => {
+        pixel.remove();
+    })
+
+    let columns = document.querySelectorAll(".column");
+
+    columns.forEach((column) => {
+        column.remove();
+    })
+}
+
+function createGrid(squares) {
+    if (container) {
+        for (let i = 0; i <= squares; i++) {
+            var column = document.createElement("div");
+            column.classList.add("column");
+            container.appendChild(column);
+            if (column) {
+                for (let i = 0; i <= squares; i++) {
+                    var pixel = document.createElement("div");
+                    pixel.classList.add("pixel");
+                    column.appendChild(pixel);
+                }
             }
         }
     }
 }
 
-const pixels = document.querySelectorAll(".pixel");
+const container = document.querySelector(".container");
+
+// create 16x16 grid
+createGrid(16);
+
+// trailing feature
+
+let pixels = document.querySelectorAll(".pixel");
 
 pixels.forEach((pixel) => {
     pixel.addEventListener("mousemove", () => {
         pixel.classList.add("colored");
     });
+})
+
+// select squares per side
+
+const changer = document.querySelector("#changer");
+
+let squares;
+
+changer.addEventListener("click", () => {
+    squares = prompt("Enter the number of squares per side");
+    if (squares == null || squares == "" || isNaN(squares)) {
+        squares = 16;
+    } else {
+        squares = parseInt(squares);
+    }
+
+    removeGrid();
+    createGrid(squares);
+
+    let pixels = document.querySelectorAll(".pixel");
+
+    pixels.forEach((pixel) => {
+        pixel.addEventListener("mousemove", () => {
+            pixel.classList.add("colored");
+        });
+    })
 })
