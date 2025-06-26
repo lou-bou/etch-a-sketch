@@ -29,6 +29,13 @@ function createGrid(squares) {
     }
 }
 
+function getRandomColorRGB(max) {
+    let R = Math.floor(Math.random() * max);
+    let G = Math.floor(Math.random() * max);
+    let B = Math.floor(Math.random() * max);
+    return `rgb(${R} ${G} ${B})`;
+}
+
 const container = document.querySelector(".container");
 
 // create 16x16 grid
@@ -39,8 +46,9 @@ createGrid(16);
 let pixels = document.querySelectorAll(".pixel");
 
 pixels.forEach((pixel) => {
-    pixel.addEventListener("mousemove", () => {
-        pixel.classList.add("colored");
+    pixel.addEventListener("mouseover", () => {
+        let RGB = getRandomColorRGB(255);
+        pixel.style.background = RGB;
     });
 })
 
@@ -64,8 +72,9 @@ changer.addEventListener("click", () => {
     let pixels = document.querySelectorAll(".pixel");
 
     pixels.forEach((pixel) => {
-        pixel.addEventListener("mousemove", () => {
-            pixel.classList.add("colored");
+        pixel.addEventListener("mouseover", () => {
+            let RGB = getRandomColorRGB(255);
+            pixel.style.background = RGB;
         });
     })
 })
